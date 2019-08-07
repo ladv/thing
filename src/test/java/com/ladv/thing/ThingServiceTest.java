@@ -28,7 +28,7 @@ class ThingServiceTest {
 
     input = "avg";
     output = thingService.execute(input);
-    assertEquals("4.0", output);
+    assertEquals("4.00", output);
 
     input = "add 2 6";
     output = thingService.execute(input);
@@ -45,7 +45,7 @@ class ThingServiceTest {
 
     input = "avg";
     output = thingService.execute(input);
-    assertEquals("4.0", output);
+    assertEquals("4.00", output);
 
     input = "add 12 11 4a";
     output = thingService.execute(input);
@@ -54,7 +54,7 @@ class ThingServiceTest {
     // make sure that invalid input hadn't been accepted
     input = "avg";
     output = thingService.execute(input);
-    assertEquals("4.0", output);
+    assertEquals("4.00", output);
 
     input = "instructions";
     output = thingService.execute(input);

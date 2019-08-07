@@ -1,6 +1,5 @@
 package com.ladv.thing;
 
-import java.text.NumberFormat;
 import java.util.IntSummaryStatistics;
 import java.util.stream.IntStream;
 
@@ -15,31 +14,35 @@ public class ThingService {
     try {
       String[] parts = input.split(" ");
       TerminalCommand command = getCommand(parts[0]);
-      String output;
-      switch (command) {
-        case ADD:
-          int addedCount = addNumbers(parts);
-          output = String.format("added %d numbers", addedCount);
-          break;
-        case MIN:
-          output = String.valueOf(statistics.getMin());
-          break;
-        case MAX:
-          output = String.valueOf(statistics.getMax());
-          break;
-        case AVG:
-          output = NumberFormat.getInstance().format(statistics.getAverage());
-          break;
-        case INSTRUCTIONS:
-          output = Constants.INSTRUCTIONS;
-          break;
-        default:
-          output = Constants.INVALID_INPUT;
-      }
-      return output;
+      return getCommandOutput(parts, command);
     } catch (CommandException e) {
       return Constants.INVALID_INPUT + e.getMessage();
     }
+  }
+
+  private String getCommandOutput(String[] parts, TerminalCommand command) {
+    String output;
+    switch (command) {
+      case ADD:
+        int addedCount = addNumbers(parts);
+        output = String.format("added %d numbers", addedCount);
+        break;
+      case MIN:
+        output = String.valueOf(statistics.getMin());
+        break;
+      case MAX:
+        output = String.valueOf(statistics.getMax());
+        break;
+      case AVG:
+        output = String.format("%.2f",statistics.getAverage());
+        break;
+      case INSTRUCTIONS:
+        output = Constants.INSTRUCTIONS;
+        break;
+      default:
+        output = Constants.INVALID_INPUT;
+    }
+    return output;
   }
 
   private TerminalCommand getCommand(String part) {
